@@ -292,7 +292,14 @@
     $event = \core\event\course_viewed::create($eventdata);
     $event->trigger();
 
-    // Include course AJAX
+    // Include course AJAX.
     include_course_ajax($course, $modnamesused);
+
+    // Include update activity/resource dialog.
+    $PAGE->requires->strings_for_js(array(
+                'expandall',
+                'collapseall',
+                ), 'moodle');
+    $PAGE->requires->yui_module('moodle-course-dialogupdate', 'M.course.dialogupdate().setupDialog');
 
     echo $OUTPUT->footer();
